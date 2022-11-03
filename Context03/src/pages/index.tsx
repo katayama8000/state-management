@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import { Dispatch, SetStateAction, useContext } from "react";
-import { TodosContext, TodosDispatchContext } from "src/state/todo";
+import { Dispatch, SetStateAction } from "react";
+import { useTodos, useTodosDispatch } from "src/state/todo";
 import { Todo } from "src/types";
 
 type Props = {
@@ -9,18 +9,8 @@ type Props = {
 };
 
 const Home: NextPage<Props> = () => {
-  const todos = useContext(TodosContext);
-  const setTodos = useContext(TodosDispatchContext);
-  const toggleIsDone = (id: Todo["id"]) => {
-    setTodos((prevTodos) => {
-      return prevTodos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, isDone: !todo.isDone };
-        }
-        return todo;
-      });
-    });
-  };
+  const todos = useTodos();
+  const { toggleIsDone } = useTodosDispatch();
 
   return (
     <div>

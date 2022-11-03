@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import { ComponentProps, Dispatch, SetStateAction, useContext } from "react";
-import { TodosContext, TodosDispatchContext } from "src/state/todo";
+import { ComponentProps, Dispatch, SetStateAction } from "react";
+import { useTodosDispatch } from "src/state/todo";
 import { Todo } from "src/types";
 
 type Props = {
@@ -8,14 +8,11 @@ type Props = {
 };
 
 const Add: NextPage<Props> = () => {
-  const setTodos = useContext(TodosDispatchContext);
+  const { addTodo } = useTodosDispatch();
   const handleSubmit: ComponentProps<"form">["onSubmit"] = (event) => {
     event.preventDefault();
     const text = event.currentTarget.text.value;
-    setTodos((prevTodos) => {
-      const newTodo = { id: prevTodos.length + 1, text, isDone: false };
-      return [...prevTodos, newTodo];
-    });
+    addTodo(text);
     event.currentTarget.reset();
   };
 
