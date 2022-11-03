@@ -8,7 +8,7 @@ type Props = {
 };
 
 const Add: NextPage<Props> = () => {
-  const { todos, setTodos } = useContext(TodoContext);
+  const { setTodos } = useContext(TodoContext);
   const handleSubmit: ComponentProps<"form">["onSubmit"] = (event) => {
     event.preventDefault();
     const text = event.currentTarget.text.value;
