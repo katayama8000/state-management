@@ -1,8 +1,6 @@
 import {
   createContext,
-  Dispatch,
   FC,
-  SetStateAction,
   useCallback,
   useContext,
   useMemo,
@@ -71,11 +69,9 @@ export const TodosProvider: FC<Props> = ({ children }) => {
 };
 
 export const useTodos = () => {
-  const todos = useContext(TodosContext);
-  return todos;
+  return useContext(TodosContext);
 };
 
 export const useTodosDispatch = () => {
-  const todosDispatch = useContext(TodosDispatchContext);
-  return todosDispatch;
+  return useContext(TodosDispatchContext);
 };

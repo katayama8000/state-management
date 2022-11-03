@@ -8,12 +8,12 @@ const TODOS: Todo[] = [
   { id: 2, text: "bar", isDone: true },
 ];
 
-export const ThemeConext = createContext("light");
+export const ThemeConext = createContext<"light" | "dark">("light");
 export const LangContext = createContext("ja");
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [todos, setTodos] = useState<Todo[]>(TODOS);
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
   const [lang, setLang] = useState("ja");
 
   return (
