@@ -4,6 +4,7 @@ import { Todo } from "src/types";
 // const
 const ADD_TODO = "ADD_TODO";
 const TOGGLE_TODO = "TOGGLE_TODO";
+const DELETE_TODO = "DELETE_TODO";
 
 // action
 export const addTodo = (text: Todo["text"]) => {
@@ -20,7 +21,16 @@ export const toggleTodo = (id: Todo["id"]) => {
   } as const;
 };
 
-type Action = ReturnType<typeof addTodo | typeof toggleTodo>;
+export const deleteTodo = (id: Todo["id"]) => {
+  return {
+    type: DELETE_TODO,
+    payload: { id },
+  } as const;
+};
+
+type Action = ReturnType<
+  typeof addTodo | typeof toggleTodo | typeof deleteTodo
+>;
 
 // initial state
 const TODOS: Todo[] = [
@@ -48,6 +58,8 @@ export const todosReducer: Reducer<Todo[], Action> = (
         }
         return todo;
       });
+    case DELETE_TODO:
+      return state.filter((todo) => todo.id !== action.payload.id);
     default:
       return state;
   }
