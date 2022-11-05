@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { Dispatch, SetStateAction } from "react";
-import { useTodos, useTodosDispatch } from "src/state/todo";
+import { useStore } from "src/state/todo";
 import { Todo } from "src/types";
 
 type Props = {
@@ -9,8 +9,9 @@ type Props = {
 };
 
 const Home: NextPage<Props> = () => {
-  const todos = useTodos();
-  const { toggleIsDone } = useTodosDispatch();
+  const todos = useStore((state) => state.todos);
+  const toggleIsDone = useStore((state) => state.toggleTodo);
+  const deleteTodo = useStore((state) => state.deleteTodo);
 
   return (
     <div>
@@ -26,6 +27,7 @@ const Home: NextPage<Props> = () => {
             />
             {todo.text}
           </label>
+          <button onClick={() => deleteTodo(todo.id)}>X</button>
         </div>
       ))}
     </div>

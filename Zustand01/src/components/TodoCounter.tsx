@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { useTodos } from "src/state/todo";
+import { useStore } from "src/state/todo";
 
 export const TodoCounter: FC = () => {
-  const todos = useTodos();
+  const todos = useStore((state) => state.todos);
   return <h2>TODO: {todos.length}件</h2>;
 };
