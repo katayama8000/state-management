@@ -2,13 +2,17 @@ import type { NextPage } from "next";
 import { useDispatch, useSelector } from "react-redux";
 import { Todo } from "src/types";
 import { RootState } from "state";
-import { toggleTodo } from "state/todos";
+import { toggleTodo, deleteTodo } from "state/todos";
 
 const Home: NextPage = () => {
   const todos = useSelector((state: RootState) => state.todos);
   const dispatch = useDispatch();
   const toggleIsDone = (id: Todo["id"]) => {
     dispatch(toggleTodo({ id }));
+  };
+
+  const handleDelete = (id: Todo["id"]) => {
+    dispatch(deleteTodo({ id }));
   };
 
   return (
@@ -25,6 +29,12 @@ const Home: NextPage = () => {
             />
             {todo.text}
           </label>
+          <button
+            onClick={() => handleDelete(todo.id)}
+            style={{ marginLeft: "10px" }}
+          >
+            x
+          </button>
         </div>
       ))}
     </div>

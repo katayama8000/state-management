@@ -29,10 +29,14 @@ const todosSlice = createSlice({
       });
       return newState;
     },
+    deleteTodo: (state, action: PayloadAction<Pick<Todo, "id">>) => {
+      const newState = state.filter((todo) => todo.id !== action.payload.id);
+      return newState;
+    },
   },
 });
 
-export const { addTodo, toggleTodo } = todosSlice.actions;
+export const { addTodo, toggleTodo, deleteTodo } = todosSlice.actions;
 export const todosReducer = todosSlice.reducer;
 
 // import { Reducer } from "redux";
