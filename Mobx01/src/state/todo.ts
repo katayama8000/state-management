@@ -2,7 +2,7 @@ import { observable, autorun, computed, action, makeObservable } from "mobx";
 import { Todo } from "src/types";
 
 class TodoStore {
-  todos = [
+  todos: Todo[] = [
     { id: 1, text: "foo", isDone: false },
     { id: 2, text: "bar", isDone: true },
   ];
@@ -37,7 +37,7 @@ class TodoStore {
     );
   }
 
-  addTodo(text: string) {
+  addTodo(text: Todo["text"]) {
     this.todos.push({
       id: this.todos.length + 1,
       text: text,
