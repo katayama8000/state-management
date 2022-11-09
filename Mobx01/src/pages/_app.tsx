@@ -9,11 +9,9 @@ const TODOS: Todo[] = [
 ];
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  const [todos, setTodos] = useState<Todo[]>(TODOS);
-
   return (
-    <Layout todoCount={todos.length}>
-      <Component {...pageProps} todos={todos} setTodos={setTodos} />
+    <Layout>
+      <Component {...pageProps} />
     </Layout>
   );
 }

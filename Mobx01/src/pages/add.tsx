@@ -1,19 +1,18 @@
+import { observer } from "mobx-react";
 import type { NextPage } from "next";
 import { ComponentProps, Dispatch, SetStateAction } from "react";
 import { Todo } from "src/types";
+import { todoStore } from "../state/todo";
 
 type Props = {
   setTodos: Dispatch<SetStateAction<Todo[]>>;
 };
 
-const Add: NextPage<Props> = ({ setTodos }) => {
+const Add: NextPage<Props> = observer(() => {
   const handleSubmit: ComponentProps<"form">["onSubmit"] = (event) => {
     event.preventDefault();
     const text = event.currentTarget.text.value;
-    setTodos((prevTodos) => {
-      const newTodo = { id: prevTodos.length + 1, text, isDone: false };
-      return [...prevTodos, newTodo];
-    });
+    todoStore.addTodo(text);
     event.currentTarget.reset();
   };
 
@@ -26,6 +25,6 @@ const Add: NextPage<Props> = ({ setTodos }) => {
       </form>
     </div>
   );
-};
+});
 
 export default Add;
