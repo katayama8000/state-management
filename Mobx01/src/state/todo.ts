@@ -33,7 +33,7 @@ class TodoStore {
     return (
       `Next todo: "${nextTodo ? nextTodo.text : "none"}". ` +
       `Progress: ${this.completedTodosCount}/${this.todos.length}` +
-      `Todos: ${this.todos[this.todos.length - 1].text}}`
+      `Todos: ${this.todos[this.todos.length - 1].text}`
     );
   }
 
