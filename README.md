@@ -25,4 +25,5 @@
 1. [Recoil](https://recoiljs.org/)
 1. [Jotai](https://jotai.org/)
 1. [Valtio](https://valtio-demo.pmnd.rs/)
+1. [MobX](https://mobx.js.org/README.html)
 1. [React Query](https://react-query.tanstack.com/) や [SWR](https://swr.vercel.app/ja) のキャッシュ
