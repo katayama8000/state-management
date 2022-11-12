@@ -5,7 +5,7 @@ import useSWR from "swr";
 export const fetcher = async (...args: Parameters<typeof fetch>) => {
   const res = await fetch(...args);
   const json = await res.json();
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  await new Promise<void>((resolve) => setTimeout(resolve, 2000));
   return json;
 };
 
