@@ -1,11 +1,13 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { ComponentProps, Dispatch, SetStateAction, useContext } from "react";
-import { TodoContext, UserContext } from "./_app";
+import { ComponentProps, useContext } from "react";
+import { useAuth } from "src/state/auth";
+import { useTodosDispatch } from "src/state/todo";
 
 const Add: NextPage = () => {
-  const { setTodos } = useContext(TodoContext);
-  const { userState } = useContext(UserContext);
+  const { addTodo } = useTodosDispatch();
+
+  const userState = useAuth();
   const router = useRouter();
   const handleSubmit: ComponentProps<"form">["onSubmit"] = (event) => {
     if (!userState.isLogin) {
@@ -15,10 +17,7 @@ const Add: NextPage = () => {
     }
     event.preventDefault();
     const text = event.currentTarget.text.value;
-    setTodos((prevTodos) => {
-      const newTodo = { id: prevTodos.length + 1, text, isDone: false };
-      return [...prevTodos, newTodo];
-    });
+    addTodo(text);
     event.currentTarget.reset();
   };
 
