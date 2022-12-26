@@ -1,4 +1,5 @@
 import { atom } from "jotai";
+import { atomWithReset, RESET } from "jotai/utils";
 
 export const priceAtom = atom<number>(10);
 export const messageAtom = atom<string>("hello");
@@ -6,6 +7,8 @@ export const productAtom = atom<{ id: number; name: string }>({
   id: 12,
   name: "good stuff",
 });
+
+export const resetAtom = atomWithReset(0);
 
 export const readOnlyAtom = atom<number>((get) => get(priceAtom) * 2);
 export const writeOnlyAtom = atom<null, { discount: number }, void>(
@@ -21,4 +24,11 @@ export const readWriteAtom = atom<number, number, void>(
     set(priceAtom, newPrice / 2);
     // you can set as many atoms as you want at the same time
   }
+);
+
+export const dollarsAtom = atomWithReset(1);
+export const centsAtom = atom(
+  (get) => get(dollarsAtom) * 100,
+  (get, set, newValue: number | typeof RESET) =>
+    set(dollarsAtom, newValue === RESET ? newValue : newValue / 100)
 );
