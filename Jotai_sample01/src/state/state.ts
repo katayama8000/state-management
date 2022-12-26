@@ -32,3 +32,11 @@ export const centsAtom = atom(
   (get, set, newValue: number | typeof RESET) =>
     set(dollarsAtom, newValue === RESET ? newValue : newValue / 100)
 );
+
+export const countAtom = atom(0);
+
+export const countReducer = (prev: number, action: { type: "inc" | "dec" }) => {
+  if (action.type === "inc") return prev + 1;
+  if (action.type === "dec") return prev - 1;
+  throw new Error("unknown action type");
+};
