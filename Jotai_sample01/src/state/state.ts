@@ -1,14 +1,17 @@
 import { atom } from "jotai";
-import { atomWithReducer, atomWithReset, RESET } from "jotai/utils";
+import { atomWithReducer, atomWithReset, RESET, selectAtom } from "jotai/utils";
 
-export const priceAtom = atom<number>(10);
+export const priceAtom = atomWithReset<number>(10);
 export const messageAtom = atom<string>("hello");
 export const productAtom = atom<{ id: number; name: string }>({
   id: 12,
   name: "good stuff",
 });
 
-export const resetAtom = atomWithReset(0);
+export const add100Atom = selectAtom<number, number>(
+  priceAtom,
+  (priceAtom) => priceAtom + 100
+);
 
 export const readOnlyAtom = atom<number>((get) => get(priceAtom) * 2);
 export const writeOnlyAtom = atom<null, { discount: number }, void>(
@@ -25,17 +28,3 @@ export const readWriteAtom = atom<number, number, void>(
     // you can set as many atoms as you want at the same time
   }
 );
-
-export const dollarsAtom = atomWithReset(1);
-export const centsAtom = atom(
-  (get) => get(dollarsAtom) * 100,
-  (get, set, newValue: number | typeof RESET) =>
-    set(dollarsAtom, newValue === RESET ? newValue : newValue / 100)
-);
-
-export const countReducer = (prev: number, action: { type: "inc" | "dec" }) => {
-  if (action.type === "inc") return prev + 1;
-  if (action.type === "dec") return prev - 1;
-  throw new Error("unknown action type");
-};
-export const countReducerAtom = atomWithReducer(0, countReducer);

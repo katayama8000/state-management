@@ -1,11 +1,6 @@
 import { useAtom } from "jotai";
 import { useResetAtom, useReducerAtom } from "jotai/utils";
-import {
-  centsAtom,
-  countReducer,
-  countReducerAtom,
-  dollarsAtom,
-} from "src/state/state";
+import { centsAtom, countReducerAtom, dollarsAtom } from "src/state/money";
 
 const Index2 = () => {
   const [dollars] = useAtom(dollarsAtom);

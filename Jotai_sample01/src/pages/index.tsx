@@ -2,10 +2,10 @@ import { useAtom, useAtomValue } from "jotai";
 import { useResetAtom } from "jotai/utils";
 import type { NextPage } from "next";
 import {
+  add100Atom,
   priceAtom,
   readOnlyAtom,
   readWriteAtom,
-  resetAtom,
   writeOnlyAtom,
 } from "src/state/state";
 
@@ -14,12 +14,15 @@ const Home: NextPage = () => {
   const doubleNum = useAtomValue(readOnlyAtom);
   const [, discount] = useAtom(writeOnlyAtom);
   const [price, setNewPrice] = useAtom(readWriteAtom);
-  const setReset = useResetAtom(resetAtom);
+  const setReset = useResetAtom(priceAtom);
+  const addHundred = useAtom(add100Atom);
   return (
     <div>
       <h3>TODO一覧</h3>
       <span>price</span>
       <p>{num}</p>
+      <span>+100</span>
+      <p>{addHundred}</p>
       <span>double-price</span>
       <p>{doubleNum}</p>
       <button onClick={() => setNum((prev) => prev + 1)}>+1</button>
