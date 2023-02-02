@@ -14,6 +14,7 @@ export const add100Atom = selectAtom<number, number>(
 );
 
 export const readOnlyAtom = atom<number>((get) => get(priceAtom) * 2);
+
 export const writeOnlyAtom = atom<null, { discount: number }, void>(
   null, // it's a convention to pass `null` for the first argument
   (get, set, update) => {

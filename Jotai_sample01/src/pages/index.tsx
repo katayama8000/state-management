@@ -1,4 +1,4 @@
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useResetAtom } from "jotai/utils";
 import type { NextPage } from "next";
 import {
@@ -12,7 +12,7 @@ import {
 const Home: NextPage = () => {
   const [num, setNum] = useAtom(priceAtom);
   const doubleNum = useAtomValue(readOnlyAtom);
-  const [, discount] = useAtom(writeOnlyAtom);
+  const discount = useSetAtom(writeOnlyAtom);
   const [price, setNewPrice] = useAtom(readWriteAtom);
   const setReset = useResetAtom(priceAtom);
   const addHundred = useAtom(add100Atom);
